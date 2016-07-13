@@ -11,5 +11,5 @@ r_github_packages:
   - hadley/ggplot2
   - analyticalmonk/Rperform
 
-after_install:
+before_script:
   - source ./run_Rperform.sh
