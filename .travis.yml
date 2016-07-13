@@ -7,6 +7,10 @@ sudo: required
 #     on_success: change
 #     on_failure: change
 
+r_packages:
+  - roxygen2
+  - microbenchmark
+
 r_github_packages:
   - hadley/ggplot2
   - analyticalmonk/Rperform
