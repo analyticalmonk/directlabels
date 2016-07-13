@@ -12,4 +12,4 @@ r_github_packages:
   - analyticalmonk/Rperform
 
 before_script:
-  - source ./run_Rperform.sh
+  - source ./.run_Rperform.sh
