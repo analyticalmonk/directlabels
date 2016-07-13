@@ -1,4 +1,4 @@
-if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+# if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   echo -e "Starting to update gh-pages\n"
 
   #go to home and setup git
@@ -15,12 +15,12 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   # if [! -f temp_Rperform.R]
   # then
     touch temp_Rperform.R
-    echo "Rperform::plot_metrics(\"./tests/unattached.r\", metric = \"time\")" >> temp_Rperform.R
+    echo "Rperform::plot_metrics(\"./tests/unattached.R\", metric = \"time\")" >> temp_Rperform.R
   # fi
   Rscript temp_Rperform.R
   rm temp_Rperform.R
 
-  git checkout -- *
+  # git checkout -- *
 
   # cd ../gh-pages
   # if [! -f index.html]
@@ -36,7 +36,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   # git push -fq origin gh-pages > /dev/null
 
   echo -e "Done magic with Rperform\n"
-fi
+# fi
 
 # if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
 #   echo -e "Starting to update gh-pages for the PR\n"
