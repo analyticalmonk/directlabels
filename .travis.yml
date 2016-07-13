@@ -2,10 +2,14 @@ language: r
 
 sudo: required
 
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+# notifications:
+#   email:
+#     on_success: change
+#     on_failure: change
 
 r_github_packages:
   - hadley/ggplot2
+  - analyticalmonk/Rperform
+
+after_install:
+  - source ./run_Rperform.sh
