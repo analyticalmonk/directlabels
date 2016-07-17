@@ -44,8 +44,8 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
 
   #go to home and setup git
   # cd $HOME
-  # git config --global user.email "travis@travis-ci.org"
-  # git config --global user.name "Travis"
+  git config --global user.email "travis@travis-ci.org"
+  git config --global user.name "Travis"
 
   #using token clone gh-pages branch
   # git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/da-ta-vinci21/Rperform_ggplotly.git  gh-pages > /dev/null
@@ -57,19 +57,22 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
 
   #Run the Rperform functions
   touch temp_Rperform.R
-  echo "Rperform::compare_PR(\"./tests/unattached.R\", metric = \"time\")" >> temp_Rperform.R
+  echo "Rperform::plot_PR_webpage(\"./tests/unattached.R\", metric = \"time\")" >> temp_Rperform.R
   Rscript temp_Rperform.R
   rm temp_Rperform.R
+  rm PR.Rmd
+
+  git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/analyticalmonk/directlabels.git  gh-pages > /dev/null
 
   # git checkout -- *
 
-  # cd ./gh-pages
-  # cp -Rf $HOME/index.html index.html
+  cd ./gh-pages
+  cp -Rf ../index.html index.html
   #
   # #add, commit and push files
-  # git add -f .
-  # git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed to gh-pages"
-  # git push -fq origin gh-pages > /dev/null
+  git add -f .
+  git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed to gh-pages"
+  git push -fq origin gh-pages > /dev/null
 
   popd
   echo -e "Done magic with Rperform and PR\n"
