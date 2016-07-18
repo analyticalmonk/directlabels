@@ -1,19 +1,14 @@
 language: r
-
 sudo: required
-
 r_packages:
-  - roxygen2
-  - microbenchmark
-  - rmarkdown
-
+- roxygen2
+- microbenchmark
+- rmarkdown
 r_github_packages:
-  - hadley/ggplot2
-  - analyticalmonk/Rperform
-
+- hadley/ggplot2
+- analyticalmonk/Rperform
 before_script:
-  - source ./.run_Rperform.sh
-
+- source ./.run_Rperform.sh
 env:
   global:
-    - secure: "nGOeCmjGVoNQIT8kJapyM8BgyK/kzDhsxv0FiaNAjXgyvXPKMjDMryr6xcAb9JEx74I9BuSFlRyF2OPOGg9NOyQ6dfSVUYAca+FvKtyrDSJxBt9fl6nLD9MIi9C4cJUDxeTFrLnhFsi6SutkStZA7+PWbtH+wuXmYbUV3TMZeJAhKlUDBnVY9liNpG9NbfgEzR/vOZdIcEBp+YDXsY4xobOL3suln6hyEWcjBHY4Uv1mnzpf9P+bN6RRqpgQOHxA53ir7rvUHL5ljQQye5b7iYp898OTx+1DIGxMKnMQCXopjXSg9moSu632+7KjeWT5eXCpo7VTv1aeJDnxfQwG8b6bxCQ9qEmoBkQoFaueNj+I6K28L8Dhjs5DVjfynbuOC6A8n/6430JmU/QQjaNVLeKzI7F9cl+OSKScwmC/tg/7O9KHZQ6W+dZkLEax7j2TUPRye1YKKPnSBqq1Crmufn/nv0/Sk3ak/36j1WmdUiMJ7eR/3esqRUIe/HPhjIdOBj1cweAbT9RSPVXZSY9DZiUZ6qJtL6/xMo459QhBAd5C4FeZCcElIeWUBnPhgqHEVBzCF5+8tFKChvIqstb2SV216PWrUOBGZh0Ik/+vRSLvPWXKdWRHG3rFy8FhtA5jSePC08bz+n+Q4CZ7VoekZesPQWjzJ8sdpaaoUIfGG0c="
+    secure: DKtsbqSr+Q1zGbm7/NukacRF7HBu6c0EpWdu1UN3Lk6vsz3mvadWkFDN/BiE0VglWcasVBRAI4MqGjwdXY4BAKj7HmmJANTrIun9Y2TZYMDyiDkTrgJyRe7YSbcbg59F7qitsbR1hHNzd561Jz88opBbNkW249JWdPqKjzTqRRtTUpMDkvPkbEBYxE6yPW6glHt5yyiFAf8S6OahbJTHAQBQgr4DN0FNJPe/y/QoPvcyS8NhAfoK0xkWMTE5TbVy4GGgYdaXdbkZ0RGvEe91nCvbvCKkAIYFbt/xkMJBWl5znwwz7Fn+06kKN+zCXMHun+O4DSiENtrzI4F9WgND9Yk282FITztApw1gZtEdMcN3xnzm4DDiEcZbXvrhmpgYcgB+GGwG+M4wu0/ZtYrIBKUCav7QOj39CxXa/eZwVyGeDTSJOTOUcJxqKTGs4Ss3YrpuEfazfkx0PMISkceq/z39I6FThutirO1x3YoYpJfjpm3UzT7RxGTjDTXyKHXet6yGPqpOXO/+pVAazRfT4+ep5vCKs2HNU+ZF8LgslCdJFU++XP3A5fDA2X6vslTqbwU3+6reSaOPBwJjxulKVRJEhNkXP5Wib4LruAJQ3mtjjdLWMUu5XQVtMG6qWjglmPgaoeh8K0fcFayh94Xl5pLY1h3i2/xKRms7UxF0k28=
