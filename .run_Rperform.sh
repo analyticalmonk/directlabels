@@ -1,6 +1,9 @@
 if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   echo -e "Starting to update gh-pages\n"
 
+  pushd ./
+  cd ..
+
   #go to home and setup git
   # cd $HOME
   # git config --global user.email "travis@travis-ci.org"
@@ -14,15 +17,18 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   # cd master
   # if [! -f temp_Rperform.R]
   # then
-    touch temp_Rperform.R
-    echo "Rperform::plot_metrics(\"./tests/unattached.R\", metric = \"time\")" >> temp_Rperform.R
+    # touch temp_Rperform.R
+    # echo "Rperform::plot_metrics(\"./tests/unattached.R\", metric = \"time\")" >> temp_Rperform.R
   # fi
-  Rscript temp_Rperform.R
-  rm temp_Rperform.R
+  # Rscript temp_Rperform.R
+  # rm temp_Rperform.R
+
+  git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/analyticalmonk/directlabels.git  gh-pages > /dev/null
 
   # git checkout -- *
 
-  # cd ../gh-pages
+  cd ../gh-pages
+  touch testing
   # if [! -f index.html]
   # then
   #   mv -Rf index.html index_old.html
@@ -31,10 +37,11 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   # cp index_buildnum${TRAVIS_BUILD_NUMBER}.html index.html
   #
   # #add, commit and push files
-  # git add -f .
-  # git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed to gh-pages"
-  # git push -fq origin gh-pages > /dev/null
+  git add -f .
+  git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed to gh-pages"
+  git push -fq origin gh-pages > /dev/null
 
+  popd
   echo -e "Done magic with Rperform\n"
 fi
 
