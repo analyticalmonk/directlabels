@@ -1,38 +1,37 @@
 if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   echo -e "Starting to update gh-pages\n"
 
-  pushd ./
-  cd ..
-
-  #go to home and setup git
+  # Setup git
   git config --global user.email $USER_EMAIL
   git config --global user.name $USER_NAME
 
-  #go into master directory and run the Rperform functions
-  # cd master
-  # if [! -f temp_Rperform.R]
-  # then
-    # touch temp_Rperform.R
-    # echo "Rperform::plot_metrics(\"./tests/unattached.R\", metric = \"time\")" >> temp_Rperform.R
-  # fi
-  # Rscript temp_Rperform.R
-  # rm temp_Rperform.R
+  # Run the Rperform functions
+  touch temp_Rperform.R
+  echo "Rperform::plot_webpage(test_directory = \"./tests/\", metric = \"time\", output=\"testing\")" >> temp_Rperform.R
+  Rscript temp_Rperform.R
+  rm temp_Rperform.R
+  rm testing.Rmd
 
-  #using token clone gh-pages branch
+  # We copy the generated html file to one level above the current directory (repo) in order
+  # to easily move it to the gh-pages directory (which we will download later)
+  mv -Rf testing.html ../index.html
+  # Store the original location (repo to be tested) and go up one level
+  pushd ./
+  cd ..
+
+  # Using token clone gh-pages branch
   git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}  gh-pages > /dev/null
 
-  # git checkout -- *
+  # Copy the generated html file to the gh-pages branch and preserve the existing files
+  cd ./gh-pages
+  if [! -f index.html]
+  then
+    mv -Rf index.html index_old.html
+  fi
+  cp -Rf ../index.html index_buildnum${TRAVIS_BUILD_NUMBER}.html
+  cp index_buildnum${TRAVIS_BUILD_NUMBER}.html index.html
 
-  cd ../gh-pages
-  touch testing
-  # if [! -f index.html]
-  # then
-  #   mv -Rf index.html index_old.html
-  # fi
-  # cp -Rf $HOME/master/index.html index_buildnum{$TRAVIS_BUILD_NUMBER}.html
-  # cp index_buildnum${TRAVIS_BUILD_NUMBER}.html index.html
-  #
-  # #add, commit and push files
+  # Add, commit and push files to the gh-pages branch
   git add -f .
   git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed to gh-pages"
   git push -fq origin gh-pages > /dev/null
