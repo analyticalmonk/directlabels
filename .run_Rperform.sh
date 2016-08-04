@@ -5,13 +5,8 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   cd ..
 
   #go to home and setup git
-  # cd $HOME
-  # git config --global user.email "travis@travis-ci.org"
-  # git config --global user.name "Travis"
-
-  #using token clone gh-pages branch
-  # git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/"{your_repo_here}"  gh-pages > /dev/null
-  # git clone --quiet --branch=master https://${GH_TOKEN}@github.com/"{your_repo_here}"  master > /dev/null
+  git config --global user.email $USER_EMAIL
+  git config --global user.name $USER_NAME
 
   #go into master directory and run the Rperform functions
   # cd master
@@ -23,7 +18,8 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   # Rscript temp_Rperform.R
   # rm temp_Rperform.R
 
-  git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/analyticalmonk/directlabels.git  gh-pages > /dev/null
+  #using token clone gh-pages branch
+  git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}  gh-pages > /dev/null
 
   # git checkout -- *
 
