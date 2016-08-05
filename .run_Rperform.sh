@@ -6,23 +6,26 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   git config --global user.name $USER_NAME
 
   # Run the Rperform functions
-  touch temp_Rperform.R
-  echo "Rperform::plot_metrics(\"./tests/unattached.R\", metric = \"time\")" >> temp_Rperform.R
-  Rscript temp_Rperform.R
-  rm temp_Rperform.R
-
-  # We copy the generated html file to one level above the current directory (repo) in order
-  # to easily move it to the gh-pages directory (which we will download later)
+  # touch temp_Rperform.R
+  # echo "Rperform::plot_webpage(\"./tests/\", metric = \"time\", output_name = \"testing\")" >> temp_Rperform.R
+  # Rscript temp_Rperform.R
+  # rm temp_Rperform.R
+  # rm testing.Rmd
+  #
+  # # We copy the generated html file to one level above the current directory (repo) in order
+  # # to easily move it to the gh-pages directory (which we will download later)
   # mv -Rf testing.html ../index.html
   # # Store the original location (repo to be tested) and go up one level
   pushd ./
   cd ..
 
+  echo ${TRAVIS_REPO_SLUG}
+
   # Using token clone gh-pages branch
   git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}  gh-pages > /dev/null
 
   # Copy the generated html file to the gh-pages branch and preserve the existing files
-  # cd ./gh-pages
+  cd ./gh-pages
   # if [! -f index.html]
   # then
   #   mv -Rf index.html index_old.html
@@ -31,8 +34,9 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   # cp index_buildnum${TRAVIS_BUILD_NUMBER}.html index.html
 
   # Add, commit and push files to the gh-pages branch
-  # git add -f .
-  # git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed to gh-pages"
+  touch tx
+  git add -f .
+  git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed to gh-pages"
   # git push -fq origin gh-pages > /dev/null
 
   popd
